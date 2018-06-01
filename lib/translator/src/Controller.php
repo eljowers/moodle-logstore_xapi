@@ -47,14 +47,16 @@ class Controller extends PhpObj {
         '\mod_imscp\event\course_module_viewed' => 'ModuleViewed',
         '\mod_survey\event\course_module_viewed' => 'ModuleViewed',
         '\mod_facetoface\event\course_module_viewed' => 'ModuleViewed',
-        '\mod_quiz\event\attempt_abandoned' => 'AttemptAbandoned',
         '\mod_quiz\event\attempt_preview_started' => 'AttemptStarted',
         '\mod_quiz\event\attempt_reviewed' => 'AttemptReviewed',
+        '\mod_quiz\event\attempt_abandoned' => 'AttemptAbandoned',
         '\mod_quiz\event\attempt_viewed' => 'ModuleViewed',
         '\mod_quiz\event\attempt_submitted' => ['AttemptSubmitted', 'QuestionSubmitted'],
         '\core\event\user_loggedin' => 'UserLoggedin',
         '\core\event\user_loggedout' => 'UserLoggedout',
         '\mod_assign\event\submission_graded' => 'AssignmentGraded',
+        '\mod_assign\event\assignment_passed' => 'AssignmentPassed',
+        '\mod_assign\event\assignment_failed' => 'AssignmentFailed',
         '\mod_assign\event\assessable_submitted' => 'AssignmentSubmitted',
         '\core\event\user_created' => 'UserRegistered',
         '\core\event\user_enrolment_created' => 'EnrolmentCreated',
@@ -65,8 +67,6 @@ class Controller extends PhpObj {
         '\mod_facetoface\event\take_attendance' => 'FacetofaceAttend',
         '\mod_scorm\event\scoreraw_submitted' => 'ScormScoreRawSubmitted',
         '\mod_scorm\event\status_submitted' => 'ScormStatusSubmitted',
-        '\mod_feedback\event\assignment_passed' => 'AssignmentPassed',
-        '\mod_feedback\event\assignment_failed' => 'AssignmentFailed',
     ];
 
     /**

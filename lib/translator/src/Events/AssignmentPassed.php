@@ -18,12 +18,12 @@ namespace MXTranslator\Events;
 
 defined('MOODLE_INTERNAL') || die();
 
-class AssignmentPassed extends ModuleViewed {
+class AssignmentPassed extends AssignmentGraded {
     /**
      * Reads data for an event.
      * @param [String => Mixed] $opts
      * @return [String => Mixed]
-     * @override ModuleViewed
+     * @override AssignmentGraded
      */
     public function read(array $opts) {
         $scoreraw = (float) ($opts['grade']->grade ?: 0);

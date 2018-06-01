@@ -36,6 +36,8 @@ class Controller extends PhpObj {
         'user_loggedout' => 'UserLoggedout',
         'assignment_graded' => 'AssignmentGraded',
         'assignment_submitted' => 'AssignmentSubmitted',
+        'assignment_passed' => 'AssignmentPassed',
+        'assignment_failed' => 'AssignmentFailed',
         'user_registered' => 'UserRegistered',
         'enrolment_created' => 'EnrolmentCreated',
         'scorm_launched' => 'ScormLaunched',
@@ -44,8 +46,6 @@ class Controller extends PhpObj {
         'training_session_unenrol' => 'EventUnenrol',
         'scorm_scoreraw_submitted' => 'ScormScoreRawSubmitted',
         'scorm_status_submitted' => 'ScormStatusSubmitted'
-        'passed' => 'AssignmentPassed',
-        'failed' => 'AssignmentFailed',
     ];
 
     /**
