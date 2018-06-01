@@ -44,6 +44,8 @@ class Controller extends PhpObj {
         'training_session_unenrol' => 'EventUnenrol',
         'scorm_scoreraw_submitted' => 'ScormScoreRawSubmitted',
         'scorm_status_submitted' => 'ScormStatusSubmitted'
+        'passed' => 'AssignmentPassed',
+        'failed' => 'AssignmentFailed',
     ];
 
     /**

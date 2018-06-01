@@ -14,10 +14,18 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace MXTranslator;
+namespace Tests;
 
 defined('MOODLE_INTERNAL') || die();
 
-class UnnecessaryEvent extends Exception {
+require_once(__DIR__ . '/xapi_testcase.php');
 
+class assignment_passed_test extends xapi_testcase {
+    protected function construct_input() {
+        return array_merge(parent::construct_input(), [
+            'objecttable' => 'assign_pass',
+            'objectid' => '1',
+            'eventname' => '\mod_assign\event\submission_passed',
+        ]);
+    }
 }
