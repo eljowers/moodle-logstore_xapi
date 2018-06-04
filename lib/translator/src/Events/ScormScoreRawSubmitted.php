@@ -26,24 +26,12 @@ class ScormScoreRawSubmitted extends ScormEvent {
      * @override ModuleViewed
      */
     public function read(array $opts) {
-        $scoremax = null;
-        $scoreraw = null;
-        $scoremin = null;
+        $scoremax = $opts['scorm_scoes_track']['scoremax'];
+        $scoreraw = $opts['cmi_data']['cmivalue'];
+        $scoremin = $opts['scorm_scoes_track']['scoremin'];
         $scorescaled = null;
 
-        if (isset($opts['scorm_scoes_track']['scoremax'])) {
-            $scoremax = $opts['scorm_scoes_track']['scoremax'];
-        }
-        if (isset($opts['cmi_data']['cmivalue'])) {
-            $scoremax = $opts['cmi_data']['cmivalue'];
-        }
-        if (isset($opts['scorm_scoes_track']['scoremin'])) {
-            $scoremin = $opts['scorm_scoes_track']['scoremin'];
-        }
-
-        if ($scoremax != 0 && $scoremin != 0) {
-            $scorescaled = $scoreraw >= 0 ? ($scoreraw / $scoremax) : ($scoreraw / $scoremin);
-        }
+        $scorescaled = $scoreraw >= 0 ? ($scoreraw / $scoremax) : ($scoreraw / $scoremin);
 
         return [array_merge(parent::read($opts)[0], [
             'recipe' => 'scorm_scoreraw_submitted',
