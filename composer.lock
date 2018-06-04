@@ -4,7 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "91a3c0a87448099a554668d86683c333",
+    "hash": "d30f23a355156a0aaaa5b225a7730a84",
+    "content-hash": "f1d46a0caa7407132beccdfffbbc4e71",
     "packages": [
         {
             "name": "namshi/jose",
@@ -67,7 +68,7 @@
                 "jwt",
                 "token"
             ],
-            "time": "2016-12-05T07:27:31+00:00"
+            "time": "2016-12-05 07:27:31"
         },
         {
             "name": "rusticisoftware/tincan",
@@ -120,20 +121,20 @@
                 "tincan",
                 "xAPI"
             ],
-            "time": "2016-09-21T16:57:05+00:00"
+            "time": "2016-09-21 16:57:05"
         },
         {
             "name": "symfony/polyfill-php56",
-            "version": "v1.4.0",
+            "version": "v1.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-php56.git",
-                "reference": "bc0b7d6cb36b10cfabb170a3e359944a95174929"
+                "reference": "af98553c84912459db3f636329567809d639a8f6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-php56/zipball/bc0b7d6cb36b10cfabb170a3e359944a95174929",
-                "reference": "bc0b7d6cb36b10cfabb170a3e359944a95174929",
+                "url": "https://api.github.com/repos/symfony/polyfill-php56/zipball/af98553c84912459db3f636329567809d639a8f6",
+                "reference": "af98553c84912459db3f636329567809d639a8f6",
                 "shasum": ""
             },
             "require": {
@@ -143,7 +144,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.4-dev"
+                    "dev-master": "1.8-dev"
                 }
             },
             "autoload": {
@@ -176,20 +177,20 @@
                 "portable",
                 "shim"
             ],
-            "time": "2017-06-09T08:25:21+00:00"
+            "time": "2018-04-26 10:06:28"
         },
         {
             "name": "symfony/polyfill-util",
-            "version": "v1.4.0",
+            "version": "v1.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-util.git",
-                "reference": "ebccbde4aad410f6438d86d7d261c6b4d2b9a51d"
+                "reference": "1a5ad95d9436cbff3296034fe9f8d586dce3fb3a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-util/zipball/ebccbde4aad410f6438d86d7d261c6b4d2b9a51d",
-                "reference": "ebccbde4aad410f6438d86d7d261c6b4d2b9a51d",
+                "url": "https://api.github.com/repos/symfony/polyfill-util/zipball/1a5ad95d9436cbff3296034fe9f8d586dce3fb3a",
+                "reference": "1a5ad95d9436cbff3296034fe9f8d586dce3fb3a",
                 "shasum": ""
             },
             "require": {
@@ -198,7 +199,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.4-dev"
+                    "dev-master": "1.8-dev"
                 }
             },
             "autoload": {
@@ -228,7 +229,7 @@
                 "polyfill",
                 "shim"
             ],
-            "time": "2017-06-09T08:25:21+00:00"
+            "time": "2018-04-26 10:06:28"
         },
         {
             "name": "willdurand/negotiation",
@@ -280,44 +281,10 @@
                 "header",
                 "negotiation"
             ],
-            "time": "2017-05-14T17:21:12+00:00"
+            "time": "2017-05-14 17:21:12"
         }
     ],
-    "packages-dev": [
-        {
-            "name": "learninglocker/statementfactory",
-            "version": "v0.0.10",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/LearningLocker/StatementFactory.git",
-                "reference": "61a6aa2dabc785300d8fc90efc704aaac4187278"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/LearningLocker/StatementFactory/zipball/61a6aa2dabc785300d8fc90efc704aaac4187278",
-                "reference": "61a6aa2dabc785300d8fc90efc704aaac4187278",
-                "shasum": ""
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Locker\\XApi\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "GPL v3"
-            ],
-            "authors": [
-                {
-                    "name": "Ryan Smith",
-                    "email": "0ryansmith1994@gmail.com"
-                }
-            ],
-            "description": "Learning Locker's classes for xAPI.",
-            "time": "2016-08-25T14:02:22+00:00"
-        }
-    ],
+    "packages-dev": null,
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": [],

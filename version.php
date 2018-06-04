@@ -13,21 +13,18 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
-
 /**
  * External xapi log store plugin
  *
  * @package    logstore_xapi
- * @copyright  2015 Jerrett Fowler <jfowler@charitylearning.org>
+ * @copyright  2018 Jerrett Fowler <jfowler@charitylearning.org>
  *                  Ryan Smith <ryan.smith@ht2.co.uk>
  *                  David Pesce <david.pesce@exputo.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-
 defined('MOODLE_INTERNAL') || die();
-
 $plugin->component = 'logstore_xapi';
-$plugin->version = 2018060100;
-$plugin->release = '0.0.1-development';
+$plugin->version = 2018022201;
+$plugin->release = 'v2.2.4';
 $plugin->requires = 2014111000;
-$plugin->maturity = MATURITY_ALPHA;
+$plugin->maturity = MATURITY_STABLE;
