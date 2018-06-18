@@ -31,10 +31,13 @@ class AssignmentGraded extends Event {
         $gradeitems = $this->repo->read_grade_items($grade->assignment, 'assign');
         return array_merge(parent::read($opts), [
             'grade' => $grade,
-            'grade_comment' => $gradecomment,
-            'grade_items' => $gradeitems,
-            'graded_user' => $this->repo->read_user($grade->userid),
-            'module' => $this->repo->read_module($grade->assignment, 'assign'),
         ]);
+        // return array_merge(parent::read($opts), [
+        //     'grade' => $grade,
+        //     'grade_comment' => $gradecomment,
+        //     'grade_items' => $gradeitems,
+        //     'graded_user' => $this->repo->read_user($grade->userid),
+        //     'module' => $this->repo->read_module($grade->assignment, 'assign'),
+        // ]);
     }
 }

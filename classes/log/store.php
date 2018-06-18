@@ -33,12 +33,12 @@ use \tool_log\helper\store as helper_store;
 use \tool_log\helper\reader as helper_reader;
 use \tool_log\helper\buffered_writer as helper_writer;
 use \core\event\base as event_base;
-use \XREmitter\Controller as xapi_controller;
-use \XREmitter\Repository as xapi_repository;
+use \XREmitter\Controller as emitter_controller;
+use \XREmitter\Repository as emitter_repository;
 use \MXTranslator\Controller as translator_controller;
 use \MXTranslator\Events\Event as Event;
-use \LogExpander\Controller as moodle_controller;
-use \LogExpander\Repository as moodle_repository;
+use \LogExpander\Controller as expander_controller;
+use \LogExpander\Repository as expander_repository;
 use \TinCan\RemoteLRS as tincan_remote_lrs;
 use \moodle_exception as moodle_exception;
 use \stdClass as php_obj;
@@ -82,15 +82,24 @@ class store extends php_obj implements log_writer {
      *
      */
     protected function is_event_ignored(event_base $event) {
+        echo "<styles>header {display: none;}</styles>";
+        echo "<pre>READ THIS: ".print_r($event, true)."</pre>";
+        // Yes event is ignored.
         if ((!CLI_SCRIPT || PHPUNIT_TEST) && !$this->logguests && isguestuser()) {
             // Always log inside CLI scripts because we do not login there.
+            echo "<script type='text/javascript'> console.debug('- LOGSTORE: event ignored. ','".json_encode($event)."');</script>";
             return true;
         }
 
-        if (!in_array($event->eventname, $this->routes)) {
-            // Ignore event if the store settings do not want to store it.
-            return true;
-        }
+        // Yes event is ignored.
+        // if (!in_array($event->eventname, $this->routes)) {
+        //     // Ignore event if not checked in the filter settings.
+        //     echo "<script type='text/javascript'> console.debug('- LOGSTORE: event ignored. ','".json_encode($event)."');</script>";
+        //     return true;
+        // }
+
+        // No event is not ignored.
+        echo "<script type='text/javascript'> console.debug('+ LOGSTORE: event NOT ignored. ','".json_encode($event)."');</script>";
         return false;
     }
 
@@ -113,8 +122,8 @@ class store extends php_obj implements log_writer {
     public function process_events(array $events) {
 
         // Initializes required services.
-        $xapicontroller = new xapi_controller($this->connect_xapi_repository());
-        $moodlecontroller = new moodle_controller($this->connect_moodle_repository());
+        $emittercontroller = new emitter_controller($this->connect_emitter_repository());
+        $expandercontroller = new expander_controller($this->connect_expander_repository());
         $translatorcontroller = new translator_controller();
 
         // Emits events to other APIs.
@@ -124,7 +133,7 @@ class store extends php_obj implements log_writer {
 
         $this->error_log('');
         $this->error_log_value('events', $events);
-        $moodleevents = $moodlecontroller->create_events($events);
+        $moodleevents = $expandercontroller->create_events($events);
 
         // Clear the user email if mbox setting is not set to mbox.
         $mbox = get_config('logstore_xapi', 'mbox');
@@ -150,12 +159,20 @@ class store extends php_obj implements log_writer {
 
         $sentevents = [];
         foreach ($eventbatches as $translatoreventsbatch) {
-            $xapievents = $xapicontroller->create_events($translatoreventsbatch);
+            $xapievents = $emittercontroller->create_events($translatoreventsbatch);
             $statements = $xapievents['statements'];
             $response = $xapievents['response'];
             foreach (array_keys($statements) as $key) {
                 if (is_numeric($key)) {
-                    $k = $xapievents[$key]['context']['extensions'][Event::CONTEXT_EXT_KEY]['id'];
+                    if($statements[0]['verb']) {
+                      echo "<script type='text/javascript'> console.debug('VERB: ','".json_encode($statements[0]['verb'])."');</script>";
+                    } else {
+                      echo "<script type='text/javascript'> console.debug('MISSING VERB!!');</script>";
+                    }
+                    echo "<script type='text/javascript'> console.debug('CONTEXT KEY: ','".Event::CONTEXT_EXT_KEY."');</script>";
+                    echo "<script type='text/javascript'> console.debug('CONTEXT ID: ','".json_encode($statements[$key]['context']['extensions'][Event::CONTEXT_EXT_KEY]['id'])."');</script>";
+                    echo "<pre>STATEMENT: ".print_r($statements[0], true)."</pre>";
+                    $k = $statements[$key]['context']['extensions'][Event::CONTEXT_EXT_KEY]['id'];
                     $sentevents[$k] = $this->getlast_action_result($response);
                 }
             }
@@ -195,7 +212,7 @@ class store extends php_obj implements log_writer {
      */
     public function is_logging() {
         try {
-            $this->connect_xapi_repository();
+            $this->connect_emitter_repository();
             return true;
         } catch (moodle_exception $ex) {
             debugging('Cannot connect to LRS: ' . $ex->getMessage(), DEBUG_DEVELOPER);
@@ -205,9 +222,9 @@ class store extends php_obj implements log_writer {
 
     /**
      * Creates a connection the xAPI store.
-     * @return xapi_repository
+     * @return emitter_repository
      */
-    private function connect_xapi_repository() {
+    private function connect_emitter_repository() {
         global $CFG;
         $remotelrs = new tincan_remote_lrs(
             $this->get_config('endpoint', ''),
@@ -218,16 +235,16 @@ class store extends php_obj implements log_writer {
         if (!empty($CFG->proxyhost)) {
             $remotelrs->setProxy($CFG->proxyhost.':'.$CFG->proxyport);
         }
-        return new xapi_repository($remotelrs);
+        return new emitter_repository($remotelrs);
     }
 
     /**
      * Creates a connection the xAPI store.
-     * @return moodle_repository
+     * @return expander_repository
      */
-    private function connect_moodle_repository() {
+    private function connect_expander_repository() {
         global $DB;
         global $CFG;
-        return new moodle_repository($DB, $CFG);
+        return new expander_repository($DB, $CFG);
     }
 }

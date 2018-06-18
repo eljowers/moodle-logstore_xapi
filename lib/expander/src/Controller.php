@@ -53,7 +53,8 @@ class Controller extends PhpObj {
         '\mod_quiz\event\attempt_submitted' => 'AttemptEvent',
         '\core\event\user_loggedin' => 'Event',
         '\core\event\user_loggedout' => 'Event',
-        '\mod_assign\event\submission_graded' => 'AssignmentGraded',
+        '\mod_assign\event\question_manually_graded' => 'AssignmentGraded',
+        // '\mod_assign\event\submission_graded' => 'AssignmentGraded',
         '\mod_assign\event\assessable_submitted' => 'AssignmentSubmitted',
         '\core\event\user_created' => 'Event',
         '\core\event\user_enrolment_created' => 'Event',
@@ -81,6 +82,7 @@ class Controller extends PhpObj {
      * @return [String => Mixed]
      */
     public function create_events(array $events) {
+      var_dump($events);
         $results = [];
         foreach ($events as $index => $opts) {
             $route = isset($opts['eventname']) ? $opts['eventname'] : '';
@@ -93,6 +95,9 @@ class Controller extends PhpObj {
                 }
             }
         }
+        // echo "<script type='text/javascript'> console.debug('Event: ','".json_encode($results)."');</script>";
+        // echo "<script>alert($print_results);</script>";
+        // echo "Hello does this work?";
         return $results;
     }
 }

@@ -36,6 +36,19 @@ class Repository extends PhpObj {
     }
 
     /**
+     * Print to console for debugging purposes
+     * @param String/array $output - object or value to be printed
+     * @param String $header - header to explain object or value
+     */
+     // function print($output, $header) {
+     //   if(is_array($output)) {
+     //     $output = implode(',', $output);
+     //
+     //     echo "<script>console.log($header, $output);</script>"
+     //   }
+     // }
+
+    /**
      * Reads an object from the store with the given type and query.
      * @param String $type
      * @param [String => Mixed] $query
