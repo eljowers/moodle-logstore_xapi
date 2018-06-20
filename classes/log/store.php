@@ -82,24 +82,25 @@ class store extends php_obj implements log_writer {
      *
      */
     protected function is_event_ignored(event_base $event) {
-        echo "<styles>header {display: none;}</styles>";
-        echo "<pre>READ THIS: ".print_r($event, true)."</pre>";
+      echo "<script type='text/javascript'> console.debug('EVENT:. ','".json_encode(print_r($event, true))."');</script>";
         // Yes event is ignored.
         if ((!CLI_SCRIPT || PHPUNIT_TEST) && !$this->logguests && isguestuser()) {
             // Always log inside CLI scripts because we do not login there.
-            echo "<script type='text/javascript'> console.debug('- LOGSTORE: event ignored. ','".json_encode($event)."');</script>";
+            // echo "<script type='text/javascript'> console.debug('- LOGSTORE: event ignored. ','".json_encode(print_r($event, true))."');</script>";
             return true;
         }
 
         // Yes event is ignored.
-        // if (!in_array($event->eventname, $this->routes)) {
-        //     // Ignore event if not checked in the filter settings.
-        //     echo "<script type='text/javascript'> console.debug('- LOGSTORE: event ignored. ','".json_encode($event)."');</script>";
-        //     return true;
-        // }
+        if (!in_array($event->eventname, $this->routes)) {
+            // Ignore event if not checked in the filter settings.
+            // echo "<pre>ROUTES ARRAY: ".print_r($this->routes, true)."</pre>";
+            // echo "<script type='text/javascript'> console.debug('- LOGSTORE: event ignored. ','".json_encode(print_r($event, true))."');</script>";
+            return true;
+        }
 
         // No event is not ignored.
-        echo "<script type='text/javascript'> console.debug('+ LOGSTORE: event NOT ignored. ','".json_encode($event)."');</script>";
+        // echo "<pre>EVENT RECEIVED: ".print_r($event, true)."</pre>";
+        // echo "<script type='text/javascript'> console.debug('+ EVENT RECEIVED:. ','".json_encode(print_r($event, true))."');</script>";
         return false;
     }
 
@@ -165,13 +166,13 @@ class store extends php_obj implements log_writer {
             foreach (array_keys($statements) as $key) {
                 if (is_numeric($key)) {
                     if($statements[0]['verb']) {
-                      echo "<script type='text/javascript'> console.debug('VERB: ','".json_encode($statements[0]['verb'])."');</script>";
+                      // echo "<script type='text/javascript'> console.debug('VERB: ','".json_encode($statements[0]['verb'])."');</script>";
                     } else {
-                      echo "<script type='text/javascript'> console.debug('MISSING VERB!!');</script>";
+                      // echo "<script type='text/javascript'> console.debug('MISSING VERB!!');</script>";
                     }
-                    echo "<script type='text/javascript'> console.debug('CONTEXT KEY: ','".Event::CONTEXT_EXT_KEY."');</script>";
-                    echo "<script type='text/javascript'> console.debug('CONTEXT ID: ','".json_encode($statements[$key]['context']['extensions'][Event::CONTEXT_EXT_KEY]['id'])."');</script>";
-                    echo "<pre>STATEMENT: ".print_r($statements[0], true)."</pre>";
+                    // echo "<script type='text/javascript'> console.debug('CONTEXT KEY: ','".Event::CONTEXT_EXT_KEY."');</script>";
+                    // echo "<script type='text/javascript'> console.debug('CONTEXT ID: ','".json_encode($statements[$key]['context']['extensions'][Event::CONTEXT_EXT_KEY]['id'])."');</script>";
+                    // echo "<pre>STATEMENT: ".print_r($statements[0], true)."</pre>";
                     $k = $statements[$key]['context']['extensions'][Event::CONTEXT_EXT_KEY]['id'];
                     $sentevents[$k] = $this->getlast_action_result($response);
                 }

@@ -35,6 +35,7 @@ class Controller extends PhpObj {
         'user_loggedin' => 'UserLoggedin',
         'user_loggedout' => 'UserLoggedout',
         'assignment_graded' => 'AssignmentGraded',
+        'question_graded' => 'QuestionGraded',
         'assignment_submitted' => 'AssignmentSubmitted',
         'assignment_passed' => 'AssignmentPassed',
         'assignment_failed' => 'AssignmentFailed',

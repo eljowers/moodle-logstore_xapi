@@ -27,8 +27,12 @@ class AssignmentGraded extends Event {
      */
     public function read(array $opts) {
         $grade = $this->repo->read_object($opts['objectid'], $opts['objecttable']);
+        echo "<script type='text/javascript'> console.debug('GRADE: ','".json_encode(print_r($grade, true))."');</script>";
         $gradecomment = $this->repo->read_grade_comment($grade->id, $grade->assignment)->commenttext;
+        echo "<script type='text/javascript'> console.debug('GRADE COMMENT: ','".json_encode(print_r($gradecomment, true))."');</script>";
         $gradeitems = $this->repo->read_grade_items($grade->assignment, 'assign');
+        echo "<script type='text/javascript'> console.debug('GRADE ITEMS: ','".json_encode(print_r($gradeitems, true))."');</script>";
+
         return array_merge(parent::read($opts), [
             'grade' => $grade,
         ]);
